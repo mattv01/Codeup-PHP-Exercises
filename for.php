@@ -1,10 +1,16 @@
 <?php
 
-fwrite(STDOUT, "Pick a number to start from: ");
-$startNumber = trim(fgets(STDIN));
+do {
+	fwrite(STDOUT, "Pick a number to start from: ");
+	$startNumber = trim(fgets(STDIN));
+} while (!is_numeric($startNumber));
 
-fwrite(STDOUT, "Pick a number to end at: ");
-$endNumber = trim(fgets(STDIN));
+
+do {
+	fwrite(STDOUT, "Pick a number to end at: ");
+	$endNumber = trim(fgets(STDIN));	
+} while (!is_numeric($endNumber));
+
 
 fwrite(STDOUT, "Pick a number to count by: ");
 $countByNumber = trim(fgets(STDIN));
