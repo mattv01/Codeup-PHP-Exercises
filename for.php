@@ -6,6 +6,9 @@ $startNumber = trim(fgets(STDIN));
 fwrite(STDOUT, "Pick a number to end at: ");
 $endNumber = trim(fgets(STDIN));
 
-for ($i = $startNumber; $i <= $endNumber; $i++) {
+fwrite(STDOUT, "Pick a number to count by: ");
+$countByNumber = trim(fgets(STDIN));
+
+for ($i = $startNumber; $i <= $endNumber; $i += $countByNumber) {
 	fwrite(STDOUT, $i . PHP_EOL);
 }
