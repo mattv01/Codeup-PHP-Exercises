@@ -2,28 +2,35 @@
 
 // Choose a number to start from
 do {
-	fwrite(STDOUT, "Pick a number to start from: ");
+	fwrite(STDOUT, "Pick a number to start from (no commas): ");
 	$startNumber = trim(fgets(STDIN));
-} while (!is_numeric($startNumber));
+} while (!is_numeric($startNumber) || ($startNumber > 10000000) || ($startNumber <- 10000000));
 
 
 // Choose a number to end at
 do {
-	fwrite(STDOUT, "Pick a number to end at: ");
+	fwrite(STDOUT, "Pick a number to end at (no commas): ");
 	$endNumber = trim(fgets(STDIN));
-} while (!is_numeric($endNumber));
+} while (!is_numeric($endNumber) || ($endNumber > 10000000) || ($endNumber < -10000000));
 
 
 // Choose number to count by... 
 fwrite(STDOUT, "Pick a number to count by: ");
 $countByNumber = trim(fgets(STDIN));
-//...or set count number to 1 if no numeric value was chosen, or if 0 or a negative number was given
-if (!is_numeric($countByNumber) || ($countByNumber <= 0)) {
+//...or set count number to 1 if no numeric value was chosen, or if number is less than 1 including negative numbers
+if (!is_numeric($countByNumber) || ($countByNumber < 1)) {
 	$countByNumber = 1;
+}
+//This is to adjust count-by number if the difference between the start and end numbers are too big (prevents the count taking too long to process)
+if ((abs($endNumber - $startNumber) >= 10000) && ($countByNumber < 100)) {
+	$countByNumber *= 10000;
+}
+if ((abs($endNumber - $startNumber) > 1000) && ($countByNumber < 10)) {
+	$countByNumber *= 1000;
 }
 
 
-// Do the counting
+// Does the counting
 for ($i = $startNumber; $i <= $endNumber; $i += $countByNumber) {
 	fwrite(STDOUT, $i . PHP_EOL);
 }
