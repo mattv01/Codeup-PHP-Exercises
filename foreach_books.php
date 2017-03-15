@@ -22,3 +22,8 @@ $books = array(
         'pages' => 544
     )
 );
+
+
+foreach ($books as $bookTitle => $bookDescription) {
+	echo "$bookTitle was published in {$bookDescription['published']}, authored by {$bookDescription['author']}, and had {$bookDescription['pages']} pages." . PHP_EOL;
+}
