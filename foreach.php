@@ -17,3 +17,10 @@ foreach ($things as $value) {
 		echo "{$value} is a string" . PHP_EOL;
 	}
 }
+
+
+foreach ($things as $value) {
+	if (is_scalar($value)) {
+		echo "{$value} is scalar" . PHP_EOL;	
+	}
+}
