@@ -10,7 +10,7 @@ foreach ($things as $value) {
 	} elseif (is_bool($value)) {
 		echo "{$value} is a boolean" . PHP_EOL;
 	}  elseif (is_array($value)) {
-		echo "{$value} is a array" . PHP_EOL;
+		echo "array is a array" . PHP_EOL;
 	} elseif (is_null($value)) {
 		echo "{$value} is a null" . PHP_EOL;
 	} elseif (is_string($value)) {
