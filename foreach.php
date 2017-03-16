@@ -29,8 +29,9 @@ foreach ($things as $value) {
 foreach ($things as $value) {
 	if (is_array($value)) {
 		foreach ($value as $array) {
-			echo "{$array}" . PHP_EOL;
+			echo "{$array} ";
 		}
+		echo "" . PHP_EOL;
 	} else {
 		echo "{$value}" . PHP_EOL;
 	}
