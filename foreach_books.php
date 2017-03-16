@@ -24,13 +24,14 @@ $books = array(
 );
 
 
-// foreach ($books as $bookTitle => $bookDescription) {
-// 	echo "$bookTitle was published in {$bookDescription['published']}, authored by {$bookDescription['author']}, and had {$bookDescription['pages']} pages." . PHP_EOL;
-// }
+foreach ($books as $bookTitle => $bookDescription) {
+	echo "$bookTitle was published in {$bookDescription['published']}, authored by {$bookDescription['author']}, and had {$bookDescription['pages']} pages." . PHP_EOL;
+}
 
 
 foreach ($books as $bookTitle => $bookDescription) {
 	if ($bookDescription['published'] > 1950) {
+        echo "These are the books published after 1950:" . PHP_EOL;
 		echo "$bookTitle was published in {$bookDescription['published']}, authored by {$bookDescription['author']}, and had {$bookDescription['pages']} pages." . PHP_EOL;
 	}
 }
