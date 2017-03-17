@@ -110,16 +110,14 @@ foreach ($states as $stateAbbrv => $stateName) {
 echo "" . PHP_EOL; // just to create room inbetween exercises in terminal
 foreach ($states as $stateAbbrv => $stateName) {
 	if ((in_array($stateName{0}, ['A','E','I','O','U'])) && (in_array((substr($stateName, -1)), ['a','e','i','o','u']))) {
-		$statesStartingAndEndingWithVowels[] = array('state' => $stateName);
+		$statesStartingAndEndingWithVowels[] = $stateName;
 	}
 }
 
 echo "States that start and end with a vowel in their name:" . PHP_EOL; 
-foreach ($statesStartingAndEndingWithVowels as $key => $value) {
-	foreach ($value as $key => $state) {
+	foreach ($statesStartingAndEndingWithVowels as $state) {
 		echo "\t $state" . PHP_EOL;
 	}
-}
 
 
 // use a foreach to construct a new array containing states with names that are more than one word.
@@ -130,16 +128,13 @@ foreach ($statesStartingAndEndingWithVowels as $key => $value) {
 echo "" . PHP_EOL; // just to create room inbetween exercises in terminal
 foreach ($states as $stateAbbrv => $stateName) {
 	if (strpos($stateName, ' '))  {
-		$statesWithMoreThanOneWordNames[] = array('state' => $stateName);
-		// echo "$stateName" . PHP_EOL;
+		$statesWithMoreThanOneWordNames[] = $stateName;
 	}
 }
 
 echo "These are the states with more than one word in their name:" . PHP_EOL; 
-foreach ($statesWithMoreThanOneWordNames as $key => $value) {
-	foreach ($value as $key => $state) {
+foreach ($statesWithMoreThanOneWordNames as $state) {
 		echo "\t $state" . PHP_EOL;
-	}
 }
 
 
@@ -150,13 +145,11 @@ foreach ($statesWithMoreThanOneWordNames as $key => $value) {
 echo "" . PHP_EOL; // just to create room inbetween exercises in terminal
 foreach ($states as $stateAbbrv => $stateName) {
 	if (preg_match('(North|South|West|East)',$stateName)) {
-		$arrayOfCardinalStates[] = array('state' => $stateName);
+		$arrayOfCardinalStates[] = $stateName;
 	}
 }
 
 echo "These are states with north, south, east, or west in their name:" . PHP_EOL; 
-foreach ($arrayOfCardinalStates as $key => $value) {
-	foreach ($value as $key => $state) {
+foreach ($arrayOfCardinalStates as $state) {
 		echo "\t $state" . PHP_EOL;
-	}
 }
