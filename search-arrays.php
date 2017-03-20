@@ -7,9 +7,21 @@ $compare = ['Tina', 'Dean', 'Mel', 'Amy', 'Michael'];
 
 function checkArrays($array, $name){
 	if (is_int(array_search($name, $array))) {
-		return "TRUE";
+		return TRUE;
 	} else {
-		return "FALSE";
+		return FALSE;
 	}
 }
-echo checkArrays($names, "Tina")  . PHP_EOL;
+// echo checkArrays($names, "Tina")  . PHP_EOL;
+
+
+function compareArrays($listOfNames, $arrayToCompare){
+	$c = 0;
+	foreach ($listOfNames as $name) {
+		if (checkArrays($arrayToCompare, $name)) {
+			$c++;
+		}	
+	}
+	return $c;
+}
+echo "There are " . compareArrays($names, $compare) . " repeated names from the two arrays." . PHP_EOL;
