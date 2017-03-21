@@ -13,7 +13,8 @@ function parseContacts($filename)
 	foreach ($listOfContacts as $key => $contact) {
 		$tempArray = explode("|", $contact);
 		$contacts[$key]["name"] = $tempArray[0];
-		$contacts[$key]["number"] = $tempArray[1];
+		$phone = substr($tempArray[1], 0, 3) . "-" . substr($tempArray[1], 3, 3) . "-" . substr($tempArray[1], 6);
+		$contacts[$key]["number"] = $phone;
 	}
 	return $contacts;
 }
