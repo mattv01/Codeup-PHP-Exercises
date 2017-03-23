@@ -15,11 +15,10 @@ John Mayer|2108439087
 Pete L|2109238492
 Larry Bird|2101230920
 Jerry Jones|8732480128
-Frank Underwood|3459872347
 Gary Ferry|2109874532
 Kale Yale|9871238972
 Ginger Ale|1231231234
 remy ratouille|1231231234
 weenie dog|1231231234
 rambo valdez|1231231234
-scooby woo|1231231234
+scooby doo|1231231234

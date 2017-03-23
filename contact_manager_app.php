@@ -1,68 +1,76 @@
 <?php
 
-function giveOptions(){
+$filename = "contacts.txt";
+
+function showOptions($filename){
 	fwrite(STDOUT, PHP_EOL . "Please choose an option:\n1) View Contacts\n2) Add New Contact\n3) Search for Contact\n4) Delete Contact\n5) Exit" . PHP_EOL);
 	$selectedOption = trim(fgets(STDIN));
 	switch ($selectedOption) {
 		case 1:
-			echo viewContacts();
-			return giveOptions();
+			echo viewContacts($filename);
+			return showOptions($filename);
 			break;
 		case 2:
-			addNewContact();
+			addNewContact($filename);
 			break;
 		case 3:
-			searchContact();
+			searchContact($filename);
 			break;
 		case 4:
-			deleteContact();
+			deleteContact($filename);
 			break;
 		case 5:
 			exitContacts();
 			break;
 		default:
-			giveOptions();
+			showOptions($filename);
 			break;
 	}
 }
-giveOptions();
+showOptions($filename);
 
-function viewContacts(){
-	fwrite(STDOUT, PHP_EOL . "Name | Phone number". PHP_EOL . (str_pad("", 20, "-")) . PHP_EOL); 
-	$filename = "contacts.txt";
+function getContacts($filename){
 	$handle = fopen($filename, 'r');
 	$contacts = fread($handle, filesize($filename));
 	$contacts = trim($contacts);
 	fclose($handle);
-	$tempArray = explode("|", $contacts);
-	$contacts = implode(" | ", $tempArray); // line 9-10 is to create space between name and number (added space before/after "|")
-	return $contacts  . PHP_EOL;
+	return $contacts;
 }
 
-function addNewContact(){
-	fwrite(STDOUT, "Please enter new contact name:" . PHP_EOL);
-	$newContactName = trim(fgets(STDIN));
-	fwrite(STDOUT, "Please enter new contact number:" . PHP_EOL);
-	$newContactNumber = trim(fgets(STDIN));
+function viewContacts($filename){
+	fwrite(STDOUT, PHP_EOL . "Name | Phone number". PHP_EOL . (str_pad("", 20, "-")) . PHP_EOL); 
+	$contacts = getContacts($filename);
+	$tempArray = explode("|", $contacts);
+	$contacts = implode(" | ", $tempArray); // line 43-44 is to create space between name and number (added space before/after "|")
+	return $contacts  . PHP_EOL;
+}
+// foreach ($contacts as $contactArray) {
+// 	echo str_pad($contactArray['name'], 16)."|"."   ".$contactArray['number'] . PHP_EOL;
+// }
+function addNewContact($filename){
+	do {
+		fwrite(STDOUT, "Please enter new contact name:" . PHP_EOL);
+		$newContactName = trim(fgets(STDIN));
+	} while (is_numeric($newContactName)||$newContactName == "");
 
-	$filename = "contacts.txt";
+	do {
+		fwrite(STDOUT, "Please enter new contact number:" . PHP_EOL);
+		$newContactNumber = trim(fgets(STDIN));
+	} while (!is_numeric($newContactNumber));
+
 	$handle = fopen($filename, 'a');
 	fwrite($handle, PHP_EOL . "$newContactName|$newContactNumber");
 	fclose($handle);
 
 	clearstatcache();
-	giveOptions();
+	showOptions($filename);
 }
 
-function searchContact(){
-	$filename = "contacts.txt";
-	$handle = fopen($filename, 'r');
-	$contacts = fread($handle, filesize($filename));
-	$contacts = trim($contacts);
-	fclose($handle);
+function searchContact($filename){
+	$contacts = getContacts($filename);
 	$tempArray = explode("\n", $contacts);
 
-	fwrite(STDOUT, "Please enter contact name to search for:" . PHP_EOL);
+	fwrite(STDOUT, "Please enter contact name or number to search for:" . PHP_EOL);
 	$searchedContactName = trim(strtolower(fgets(STDIN)));
 
 	fwrite(STDOUT, PHP_EOL . "Name | Phone number". PHP_EOL . (str_pad("", 20, "-")) . PHP_EOL); 
@@ -73,18 +81,13 @@ function searchContact(){
 			echo "$value" . PHP_EOL;
 		}
 	}
-	clearstatcache();
-	giveOptions();
+	showOptions($filename);
 }
 
-function deleteContact(){
-	$filename = "contacts.txt";
-	$handle = fopen($filename, 'r');
-	$contacts = fread($handle, filesize($filename));
-	$contacts = trim($contacts);
-	fclose($handle);
-
+function deleteContact($filename){
+	$contacts = getContacts($filename);
 	$tempArray = explode("\n", $contacts);
+
 	fwrite(STDOUT, "Please enter contact name to delete:" . PHP_EOL);
 	$contactNameToDelete = trim(strtolower(fgets(STDIN)));
 
@@ -95,16 +98,14 @@ function deleteContact(){
 	}
 	$string = implode("\n", $tempArray);
 
-	$filename = "contacts.txt";
 	$handle = fopen($filename, 'w');
 	fwrite($handle, "$string");
 	fclose($handle);
 
 	clearstatcache();
-	giveOptions();
+	showOptions($filename);
 }
 
 function exitContacts(){
 	echo "Goodbye!" . PHP_EOL;
 }
-
