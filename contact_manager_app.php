@@ -88,7 +88,7 @@ function deleteContact($filename){
 	$contacts = getContacts($filename);
 	$tempArray = explode("\n", $contacts);
 
-	fwrite(STDOUT, "Please enter contact name to delete:" . PHP_EOL);
+	fwrite(STDOUT, "Please enter contact name or number to delete:" . PHP_EOL);
 	$contactNameToDelete = trim(strtolower(fgets(STDIN)));
 
 	foreach ($tempArray as $key => $value) {
