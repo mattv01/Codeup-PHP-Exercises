@@ -2,6 +2,8 @@
 
 class Model
 {
+	protected static $table;
+
     // Array to store our key/value data
     private $attributes = [];
 
@@ -21,6 +23,11 @@ class Model
         }
 
         return null;
+    }
+
+    public static function getTableName() 
+    {
+        return static::$table;
     }
 }
 ?>
